@@ -1,0 +1,29 @@
+@import './variables';
+
+@mixin mobile {
+    @media (max-width: $breakpoint-mobile) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: $breakpoint-tablet) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: $breakpoint-desktop) {
+        @content;
+    }
+}
+
+@mixin navTypography {
+    font-family: $font-family-inter;
+    font-size: $font-size-nav;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-nav;
+    letter-spacing: $letter-spacing-nav;
+}
+
+
