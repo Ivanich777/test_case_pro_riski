@@ -1,5 +1,5 @@
 import { Icon } from '@/shared/ui/Icon'
-import styles from '@/shared/styles/components/Navbar.module.scss'
+import buttonStyles from '@/shared/styles/components/navbar-button.module.scss';
 import cn from "classnames";
 import React from "react";
 
@@ -21,9 +21,12 @@ export const ButtonContent: React.FC<IContentButtonProps> = (props) => {
                 width={20}
                 height={20}
                 alt={label}
-                className={cn(styles.icon, { [styles.active]: active })}
+                className={cn(
+                    buttonStyles['navbar-button__icon'],
+                    { [buttonStyles['navbar-button__icon--active']]: active }
+                )}
             />
-            <span className={styles.label}>{label}</span>
+            <span className={buttonStyles['navbar-button__label']}>{label}</span>
         </>
     )
 };

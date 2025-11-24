@@ -1,0 +1,102 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.navbar-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem;
+    width: fit-content;
+    min-width: 95px;
+
+    @include navTypography;
+    text-transform: none;
+    border-radius: 6px;
+
+    border: 1px solid transparent;
+    background-color: transparent;
+    box-shadow: none;
+
+    transition: 
+        background-color $transition-normal,
+        border-color $transition-normal,
+        color $transition-normal,
+        transform $transition-fast;
+
+    &:hover:not(&--active) {
+    transform: scale(1.02);
+    }
+
+    &--inactive {
+        color: $text-secondary;
+
+        &:hover {
+            background-color: rgba(50, 154, 133, 0.08);
+            color: $primary-color;
+            cursor: pointer;
+
+            .navbar-button__icon {
+                filter: $icon-primary-filter;
+            }
+        }
+    }
+
+    &--active {
+        border: 1px solid $primary-color !important;
+        color: $primary-color !important;
+        pointer-events: none;
+        cursor: default;
+
+        &:hover {
+            border-color: $primary-color !important;
+            color: $primary-color !important;
+        }
+    }
+
+    @include tablet {
+        width: 70px;
+        height: fit-content !important;
+        min-width: fit-content !important;
+        font-size: 13px;
+    }
+
+    @include mobile {
+        width: 60px;
+        height: fit-content !important;
+        min-width: fit-content !important;
+        font-size: 10px;
+    }
+}
+
+.navbar-button__icon {
+    display: block;
+    transition: 
+        filter $transition-slow,
+        transform $transition-fast;
+
+    &--active {
+        filter: $icon-primary-filter;
+    }
+
+    @include tablet {
+        width: 70px;
+    }
+
+    @include mobile {
+        width: 60px;
+    }
+}
+
+.navbar-button__label {
+    display: block;
+    margin: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    transition: 
+        color $transition-normal,
+        transform $transition-fast;
+}
+

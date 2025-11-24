@@ -1,34 +1,50 @@
-import Link from "next/link";
+import { Link, usePathname } from '@/i18n/routing';
+import { AppRoute } from '@/shared/lib/routes';
 import cn from "classnames";
-import styles from '@/shared/styles/components/Navbar.module.scss'
-import { ButtonContent } from "@/widgets/ButtonContent";
+import styles from './NavLink.module.scss';
+import buttonStyles from '@/shared/styles/components/navbar-button.module.scss';
+import { ButtonContent } from "@/shared/ui/ButtonContent";
 import React from "react";
 
 interface INavLinkProps {
-    href: string;
+    href: AppRoute;
     label: string;
     icon: string;
-    active?: boolean;
 }
 
 export const NavLink: React.FC<INavLinkProps> = (props) => {
     const {
         href,
         label,
-        icon,
-        active = false
+        icon
     } = props;
 
-    return(
+    const pathname = usePathname();
+    const active = pathname === href;
+
+    const className = cn(
+        styles['nav-link'],
+        buttonStyles['navbar-button'],
+        {
+            [buttonStyles['navbar-button--active']]: active,
+            [buttonStyles['navbar-button--inactive']]: !active,
+        }
+    );
+
+    if (active) {
+        return (
+            <span className={className}>
+                <ButtonContent label={label} icon={icon} active={active} />
+            </span>
+        );
+    }
+
+    return (
         <Link
             href={href}
-            style={{ textDecoration: 'none' }}
-            className={cn(styles.navButton, {
-                [styles.active]: active,
-                [styles.inactive]: !active,
-            })}
+            className={className}
         >
             <ButtonContent label={label} icon={icon} active={active} />
         </Link>
     );
-}
+};

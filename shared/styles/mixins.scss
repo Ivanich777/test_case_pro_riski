@@ -1,4 +1,4 @@
-@import './variables';
+@use '@/shared/styles/variables' as *;
 
 @mixin mobile {
     @media (max-width: $breakpoint-mobile) {

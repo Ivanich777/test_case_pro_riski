@@ -1,41 +1,73 @@
 'use client'
 
 import { IconButton, Menu, MenuItem } from "@mui/material";
-import { ButtonContent } from "@/widgets/ButtonContent";
-import styles from '@/shared/styles/components/Navbar.module.scss'
+import { Icon } from "@/shared/ui/Icon";
+import styles from './LangSwitcher.module.scss';
+import { useLocale, useTranslations } from "next-intl";
 import React from "react";
+import { NavigationLink } from "@/widgets/LangSwitcher/ui/components/NavigationLink/NavigationLink";
+import { LOCALES, isActiveLocale } from "@/shared/lib/localeUtils";
+import { useMenu } from "@/shared/hooks/useMenu";
 
 interface ILangSwitcherProps {
-    label: string;
     icon: string
 }
 
-export const LangSwitcher:React.FC<ILangSwitcherProps> = (props) => {
-    const {label, icon} = props;
+const getMenuItemStyles = (isActive: boolean) => ({
+    fontWeight: isActive ? 'bold' : 'normal',
+    backgroundColor: isActive ? 'action.selected' : 'transparent',
+    '&.Mui-disabled': { opacity: 1 }
+});
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+export const LangSwitcher: React.FC<ILangSwitcherProps> = (props) => {
+    const { icon } = props;
+    const { anchorEl, open, handleOpen, handleClose } = useMenu();
+    const t = useTranslations('common');
+    const currentLocale = useLocale();
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     return (
-        <div className={styles.navButton}>
-            <IconButton size={"small"} onClick={handleClick} className={styles.navButton}>
-                <ButtonContent label={label} icon={icon} />
+        <div className={styles['lang-switcher']}>
+            <IconButton
+                size="small"
+                onClick={handleOpen}
+                className={styles['lang-switcher__button']}
+            >
+                <Icon
+                    src={icon}
+                    width={20}
+                    height={20}
+                    alt={t('language')}
+                />
+                <span className={styles['lang-switcher__label']}>
+                    {t('language')}
+                </span>
             </IconButton>
             <Menu
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'left' }}
             >
-                <MenuItem onClick={handleClose}>En</MenuItem>
-                <MenuItem onClick={handleClose}>Ru</MenuItem>
+                {LOCALES.map((locale) => {
+                    const isActive = isActiveLocale(locale.code, currentLocale);
+                    return (
+                        <MenuItem
+                            key={locale.code}
+                            disabled={isActive}
+                            sx={getMenuItemStyles(isActive)}
+                        >
+                            <NavigationLink
+                                locale={locale.code}
+                                onClose={handleClose}
+                                isActive={isActive}
+                            >
+                                {locale.label}
+                            </NavigationLink>
+                        </MenuItem>
+                    );
+                })}
             </Menu>
         </div>
     );
