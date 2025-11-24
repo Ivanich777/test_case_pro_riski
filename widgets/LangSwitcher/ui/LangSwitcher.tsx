@@ -6,45 +6,32 @@ import styles from './LangSwitcher.module.scss';
 import { useLocale, useTranslations } from "next-intl";
 import React from "react";
 import { NavigationLink } from "@/widgets/LangSwitcher/ui/components/NavigationLink/NavigationLink";
-import { LOCALES } from "@/shared/lib/localeUtils";
+import { LOCALES, isActiveLocale } from "@/shared/lib/localeUtils";
+import { useMenu } from "@/shared/hooks/useMenu";
 
 interface ILangSwitcherProps {
     icon: string
 }
 
+const getMenuItemStyles = (isActive: boolean) => ({
+    fontWeight: isActive ? 'bold' : 'normal',
+    backgroundColor: isActive ? 'action.selected' : 'transparent',
+    '&.Mui-disabled': { opacity: 1 }
+});
+
 export const LangSwitcher: React.FC<ILangSwitcherProps> = (props) => {
     const { icon } = props;
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    const { anchorEl, open, handleOpen, handleClose } = useMenu();
     const t = useTranslations('common');
     const currentLocale = useLocale();
-
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
 
     return (
         <div className={styles['lang-switcher']}>
             <IconButton
                 size="small"
-                onClick={handleClick}
+                onClick={handleOpen}
                 className={styles['lang-switcher__button']}
-                sx={{
-                    border: '1px solidrgb(224, 224, 224)',
-                    borderRadius: '4px',
-                    backgroundColor: 'transparent',
-                    flexDirection: 'column',
-                    minWidth: 'auto',
-                    width: 'auto',
-                    height: 'auto',
-                    padding: '4px 8px',
-                    gap: '2px'
-                }}
             >
                 <Icon
                     src={icon}
@@ -63,25 +50,24 @@ export const LangSwitcher: React.FC<ILangSwitcherProps> = (props) => {
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                 transformOrigin={{ vertical: 'top', horizontal: 'left' }}
             >
-                {LOCALES.map((locale) => (
-                    <MenuItem
-                        key={locale.code}
-                        disabled={locale.code === currentLocale}
-                        sx={{
-                            fontWeight: locale.code === currentLocale ? 'bold' : 'normal',
-                            backgroundColor: locale.code === currentLocale ? 'action.selected' : 'transparent',
-                            '&.Mui-disabled': { opacity: 1 }
-                        }}
-                    >
-                        <NavigationLink
-                            locale={locale.code}
-                            onClose={handleClose}
-                            isActive={locale.code === currentLocale}
+                {LOCALES.map((locale) => {
+                    const isActive = isActiveLocale(locale.code, currentLocale);
+                    return (
+                        <MenuItem
+                            key={locale.code}
+                            disabled={isActive}
+                            sx={getMenuItemStyles(isActive)}
                         >
-                            {locale.label}
-                        </NavigationLink>
-                    </MenuItem>
-                ))}
+                            <NavigationLink
+                                locale={locale.code}
+                                onClose={handleClose}
+                                isActive={isActive}
+                            >
+                                {locale.label}
+                            </NavigationLink>
+                        </MenuItem>
+                    );
+                })}
             </Menu>
         </div>
     );
