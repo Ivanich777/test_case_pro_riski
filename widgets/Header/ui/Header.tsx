@@ -1,8 +1,9 @@
 import { LangSwitcher } from "@/widgets/LangSwitcher";
-import { Logo } from "@/widgets/Logo/Logo";
+import { Logo } from "@/shared/ui/Logo";
 import { Navbar } from "@/widgets/Navbar";
-import { AppBar } from "@mui/material";
-import { Box, Toolbar } from "@mui/material";
+import { AppBar, Toolbar, Box } from "@mui/material";
+import { QRButton } from "./components/QRButton";
+import { UserAvatar } from "./components/Avatar";
 
 export const Header = () => {
     return (
@@ -17,8 +18,16 @@ export const Header = () => {
             <Toolbar>
                 <Logo />
                 <Navbar />
-                <Box sx={{ marginLeft: 'auto' }}>
-                    <LangSwitcher label={'Язык'} icon={'/assets/icons/locale.svg'} />
+                <Box sx={{
+                    marginLeft: 'auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.5,
+                    height: '100%'
+                }}>
+                    <LangSwitcher icon={'/assets/icons/locale.svg'} />
+                    <QRButton />
+                    <UserAvatar />
                 </Box>
             </Toolbar>
         </AppBar>

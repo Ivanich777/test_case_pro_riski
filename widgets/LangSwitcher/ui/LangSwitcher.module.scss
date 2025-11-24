@@ -1,0 +1,26 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
+
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    transition: filter $transition-slow;
+
+    &:hover {
+        filter: $icon-primary-filter;
+    }
+}
+
+.lang-switcher__button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lang-switcher__label {
+    @include navTypography;
+    color: inherit;
+    white-space: nowrap;
+}
+
