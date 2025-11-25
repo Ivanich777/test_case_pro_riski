@@ -1,0 +1,17 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
+
+.pagination {
+    margin-top: 2rem;
+    padding: 1rem 0;
+}
+
+.pagination__info {
+    color: $text-secondary;
+    white-space: nowrap;
+
+    @include mobile {
+        font-size: 0.75rem;
+    }
+}
+

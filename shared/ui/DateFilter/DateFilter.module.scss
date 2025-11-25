@@ -1,0 +1,22 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
+
+.date-filter {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+
+    @include mobile {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+.date-filter__input {
+    min-width: 150px;
+
+    @include mobile {
+        width: 100%;
+    }
+}
+

@@ -2,8 +2,9 @@ import { LangSwitcher } from "@/widgets/LangSwitcher";
 import { Logo } from "@/shared/ui/Logo";
 import { Navbar } from "@/widgets/Navbar";
 import { AppBar, Toolbar, Box } from "@mui/material";
-import { QRButton } from "./components/QRButton";
-import { UserAvatar } from "./components/Avatar";
+import { QRButton } from "./components/QRButton/QRButton";
+import { UserAvatar } from "./components/UserAvatar/UserAvatar";
+import styles from './Header.module.scss';
 
 export const Header = () => {
     return (
@@ -13,18 +14,13 @@ export const Header = () => {
             sx={{
                 bgcolor: 'background.paper',
                 borderBottom: '1px solid #e0e0e0',
-                borderColor: 'divider'
-            }}>
-            <Toolbar>
+            }}
+            className={styles['header']}
+        >
+            <Toolbar className={styles['header__toolbar']}>
                 <Logo />
                 <Navbar />
-                <Box sx={{
-                    marginLeft: 'auto',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 1.5,
-                    height: '100%'
-                }}>
+                <Box className={styles['header__actions']}>
                     <LangSwitcher icon={'/assets/icons/locale.svg'} />
                     <QRButton />
                     <UserAvatar />

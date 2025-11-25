@@ -2,6 +2,7 @@
 
 import { IconButton } from "@mui/material";
 import { Icon } from "@/shared/ui/Icon";
+import styles from './QRButton.module.scss';
 
 export const QRButton = () => {
     const handleClick = () => {
@@ -12,17 +13,7 @@ export const QRButton = () => {
         <IconButton
             size="small"
             onClick={handleClick}
-            sx={{
-                padding: '4px',
-                width: 'auto',
-                height: 'auto',
-                border: '1px solid #e0e0e0',
-                borderRadius: '4px',
-                backgroundColor: 'transparent',
-                '&:hover': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.04)'
-                }
-            }}
+            className={styles['qr-button']}
         >
             <Icon
                 src="/assets/icons/qr.svg"

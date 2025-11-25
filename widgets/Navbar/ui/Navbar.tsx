@@ -1,15 +1,16 @@
 'use client'
 
 import { Box } from '@mui/material';
-import { NavLink } from './components/NavLink';
+import { NavLink } from './components/NavLink/NavLink';
 import { useTranslations } from "next-intl";
 import { AppRoutes } from '@/shared/lib/routes';
+import styles from './Navbar.module.scss';
 
 export const Navbar = () => {
     const t = useTranslations('common');
 
     return (
-        <Box sx={{ display: 'flex', gap: 2, ml: 3 }}>
+        <Box className={styles['navbar']}>
             <NavLink
                 href={AppRoutes.SIMULATOR}
                 label={t('simulator')}

@@ -1,36 +1,45 @@
-// Цвета
+/* Цвета */
 $primary-color: #329A85;
 $primary-dark: #247a6b;
 $text-primary: #212121;
-$text-secondary: #757575;
+$text-secondary: #A2A6A5;
 $background-paper: #ffffff;
 $divider-color: #e0e0e0;
 $action-hover: rgba(0, 0, 0, 0.04);
+$hover-background: rgba(50, 154, 133, 0.08);
+$card-background: #F0F5F4;
+$badge-border-color: #F5FAF9;
+$additional-info-background: #FCFFFE;
 
-// CSS фильтры для иконок 
-// Тут можно было не заморачивать и использовать библиотеку 
+/* CSS фильтры для иконок */
 $icon-primary-filter: brightness(0) saturate(100%) 
     invert(47%) sepia(67%) saturate(1234%) 
     hue-rotate(140deg) brightness(90%) contrast(85%);
 
-// Шрифты
+/* Шрифты */
 $font-family-inter: 'Inter', sans-serif;
 $font-size-nav: 14px;
 $font-weight-regular: 400;
 $line-height-nav: 121%;
 $letter-spacing-nav: 0%;
 
-// Размеры
+/* Размеры */
 $nav-button-width: 80px;
 $nav-button-height: 39px;
 $nav-button-gap: 2px;
+$button-height: 50px;
 
-// Breakpoints
+/* Border radius */
+$border-radius-xs: 2px;
+$border-radius-sm: 4px;
+$border-radius-md: 6px;
+
+/* Breakpoints */
 $breakpoint-mobile: 600px;
 $breakpoint-tablet: 960px;
 $breakpoint-desktop: 1280px;
 
-// Transitions
+/* Transitions */
 $transition-fast: 0.15s ease;
 $transition-normal: 0.2s ease;
 $transition-slow: 0.3s ease;

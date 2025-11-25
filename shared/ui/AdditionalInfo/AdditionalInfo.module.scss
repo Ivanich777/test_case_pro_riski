@@ -1,0 +1,21 @@
+@use '@/shared/styles/variables' as *;
+
+.additional-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 13px;
+    gap: 10px;
+    padding: 1px 3px;
+    border-radius: $border-radius-xs;
+    background: $additional-info-background;
+
+    font-family: $font-family-inter;
+    font-weight: 500;
+    font-size: 9px;
+    line-height: 100%;
+    color: $primary-color;
+    white-space: nowrap;
+}
+

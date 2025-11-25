@@ -1,4 +1,5 @@
-import {  Avatar, Badge} from "@mui/material";
+import { Avatar, Badge } from "@mui/material";
+import styles from './UserAvatar.module.scss';
 
 export const UserAvatar = () => {
     return (
@@ -11,13 +12,7 @@ export const UserAvatar = () => {
                 horizontal: 'right',
             }}
         >
-            <Avatar
-                sx={{
-                    width: 40,
-                    height: 40,
-                    cursor: 'pointer'
-                }}
-            >
+            <Avatar className={styles['user-avatar']}>
                 U
             </Avatar>
         </Badge>

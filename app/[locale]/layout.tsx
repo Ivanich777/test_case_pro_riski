@@ -1,6 +1,8 @@
 import Providers from '../providers';
 import { Header } from '@/widgets/Header';
+import { Box } from '@mui/material';
 import { getMessages } from "next-intl/server";
+import styles from './Layout.module.scss';
 
 export default async function LocaleLayout({
     children,
@@ -14,8 +16,12 @@ export default async function LocaleLayout({
 
     return (
         <Providers locale={locale} messages={messages}>
-            <Header />
-            {children}
+            <Box className={styles['layout']}>
+                <Header />
+                <Box component="main" className={styles['layout__main']}>
+                    {children}
+                </Box>
+            </Box>
         </Providers>
     );
 }

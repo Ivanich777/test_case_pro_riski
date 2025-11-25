@@ -1,0 +1,2 @@
+export { TradeFiltersWrapper } from './TradeFiltersWrapper';
+

@@ -1,0 +1,19 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
+
+.filters {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: $background-paper;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+
+    @include mobile {
+        padding: 1rem;
+    }
+}
+
+.filters__reset {
+    text-transform: none;
+}
+
