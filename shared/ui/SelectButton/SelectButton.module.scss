@@ -1,4 +1,5 @@
 @use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
 
 .select-button {
     height: 28px;
@@ -41,6 +42,20 @@
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed !important;
+    }
+
+    @include tablet {
+        min-width: 80px;
+        padding: 6px 10px !important;
+        font-size: 13px !important;
+        height: 26px;
+    }
+
+    @include mobile {
+        min-width: 70px;
+        padding: 5px 8px !important;
+        font-size: 12px !important;
+        height: 24px;
     }
 }
 

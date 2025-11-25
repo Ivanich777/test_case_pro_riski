@@ -1,0 +1,11 @@
+@use '@/shared/styles/variables' as *;
+
+.page-title {
+    font-family: $font-family-inter;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    color: #1F2423;
+    display: block;
+}
+

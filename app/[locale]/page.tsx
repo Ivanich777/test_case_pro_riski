@@ -1,11 +1,12 @@
 import { MOCK_STATISTICS } from '@/shared/data/mockStatistics';
 import { Statistics } from '@/widgets/Statistics';
-import { Container, Box, Typography } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import styles from './MainPage.module.scss';
 import { DateRangeFilterWrapper } from '@/widgets/Filters/ui/DateRangeFilterWrapper';
 import { TradeFiltersWrapper } from '@/widgets/Filters/ui/TradeFiltersWrapper';
 import { TradesTableWrapper } from '@/widgets/TradesTableWrapper';
+import { PageTitle } from '@/shared/ui/PageTitle';
 
 export default async function Main() {
   const t = await getTranslations('home');
@@ -24,7 +25,9 @@ export default async function Main() {
       className={styles['main-page-container']}
     >
       <Box>
-        <Typography sx={{ fontSize: '24px', fontWeight: 600 }} variant="h2">{t('title')}</Typography>
+        <PageTitle>
+          {t('title')}
+        </PageTitle>
       </Box>
       <Box className={styles['main-page-section']}>
         <DateRangeFilterWrapper badgeValue={13} />

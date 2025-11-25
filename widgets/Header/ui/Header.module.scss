@@ -1,4 +1,5 @@
 @use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
 
 .header {
 
@@ -6,6 +7,18 @@
 
 .header__toolbar {
     height: 80px;
+    padding: 0 1rem;
+
+    @include mobile {
+        height: 60px;
+        padding: 0 0.75rem;
+    }
+}
+
+.header__navbar--desktop {
+    @include mobile {
+        display: none !important;
+    }
 }
 
 .header__actions {
@@ -14,5 +27,15 @@
     align-items: center;
     gap: 0.75rem;
     height: 100%;
+
+    @include mobile {
+        gap: 0.5rem;
+    }
+}
+
+.header__lang-switcher--desktop {
+    @include mobile {
+        display: none !important;
+    }
 }
 

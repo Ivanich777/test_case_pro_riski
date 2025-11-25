@@ -73,15 +73,19 @@ export const SelectButton: React.FC<ISelectButtonProps> = ({
                     horizontal: 'left',
                 }}
             >
-                {options.map((option) => (
-                    <MenuItem
-                        key={option.value}
-                        onClick={() => handleSelect(option.value)}
-                        selected={option.value === value}
-                    >
-                        {option.label}
-                    </MenuItem>
-                ))}
+                {options.map((option) => {
+                    const isSelected = option.value === value;
+                    return (
+                        <MenuItem
+                            key={option.value}
+                            onClick={() => handleSelect(option.value)}
+                            selected={isSelected}
+                            disabled={isSelected}
+                        >
+                            {option.label}
+                        </MenuItem>
+                    );
+                })}
             </Menu>
         </>
     );

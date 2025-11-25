@@ -1,5 +1,7 @@
 @use '@/shared/styles/variables' as *;
 
+@use '@/shared/styles/mixins' as *;
+
 .trades-table {
     width: 100% !important;
     max-width: 100% !important;
@@ -39,6 +41,26 @@
         table-layout: auto;
         margin: 0 !important;
         border-collapse: collapse;
+    }
+
+    @media (max-width: 1800px) {
+        overflow-x: auto !important;
+        
+        & .MuiTableContainer-root {
+            overflow-x: auto !important;
+        }
+        
+        & .MuiPaper-root {
+            overflow-x: auto !important;
+        }
+    }
+
+    @include tablet {
+        margin-top: 1.5rem;
+    }
+
+    @include mobile {
+        margin-top: 1rem;
     }
 }
 
