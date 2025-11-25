@@ -8,37 +8,33 @@ import styles from './Pagination.module.scss';
 interface IPaginationProps {
     page: number;
     totalPages: number;
-    totalItems: number;
+    total: number;
     pageSize: number;
-    onChange: (page: number) => void;
+    onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
 export const Pagination: React.FC<IPaginationProps> = ({
     page,
     totalPages,
-    totalItems,
+    total,
     pageSize,
-    onChange
+    onPageChange
 }) => {
     const t = useTranslations('home');
 
-    const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
-        onChange(value);
-    };
-
     const startItem = (page - 1) * pageSize + 1;
-    const endItem = Math.min(page * pageSize, totalItems);
+    const endItem = Math.min(page * pageSize, total);
 
     return (
         <Box className={styles['pagination']}>
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" flexWrap="wrap">
                 <Typography variant="body2" className={styles['pagination__info']}>
-                    {t('pagination.showing', { start: startItem, end: endItem, total: totalItems })}
+                    {t('pagination.showing', { start: startItem, end: endItem, total })}
                 </Typography>
                 <MuiPagination
                     count={totalPages}
                     page={page}
-                    onChange={handleChange}
+                    onChange={onPageChange}
                     color="primary"
                     size="medium"
                     showFirstButton

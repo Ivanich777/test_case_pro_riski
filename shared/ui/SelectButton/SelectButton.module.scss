@@ -14,16 +14,33 @@
     text-transform: none !important;
     gap: 2px !important;
     box-shadow: none !important;
-    border: none !important;
+    border: 1px solid transparent !important;
     white-space: nowrap;
+    transition:
+        background-color $transition-normal,
+        border-color $transition-normal;
 
     &:hover {
+        background-color: rgba(50, 154, 133, 0.05) !important;
+    }
+
+    &--active {
+        border: 1px solid $primary-color !important;
         background-color: $card-background !important;
+
+        &:hover {
+            background-color: $card-background !important;
+        }
     }
 
     &__icon {
         margin-left: 2px;
         flex-shrink: 0;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed !important;
     }
 }
 

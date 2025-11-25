@@ -44,7 +44,7 @@ export const StatisticsCard: React.FC<IStatisticsCardProps> = ({ card }) => {
     const formatValue = (val: number | string): string => {
         if (typeof val === 'string') {
             if (val.startsWith('statistics.')) {
-                return t(val as any);
+                return t(val as Parameters<typeof t>[0]);
             }
             return val;
         }
@@ -118,7 +118,7 @@ export const StatisticsCard: React.FC<IStatisticsCardProps> = ({ card }) => {
                 </CardText>
                 {!isDoubleCard && additionalInfo && typeof additionalInfo === 'string' && (
                     <AdditionalInfo>
-                        {additionalInfo.startsWith('statistics.') ? t(additionalInfo as any) : additionalInfo}
+                        {additionalInfo.startsWith('statistics.') ? t(additionalInfo as Parameters<typeof t>[0]) : additionalInfo}
                     </AdditionalInfo>
                 )}
             </Box>

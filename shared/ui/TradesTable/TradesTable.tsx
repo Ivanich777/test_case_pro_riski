@@ -21,14 +21,34 @@ interface ITradesTableProps {
 }
 
 export const TradesTable: React.FC<ITradesTableProps> = ({ trades }) => {
-    const { t, processTrade, getTakesLabel } = useTradesTable(trades);
+    const { t, processTrade, getTakesLabel } = useTradesTable();
 
     return (
         <TableContainer
             component={Paper}
             className={styles['trades-table']}
+            sx={{
+                width: '100%',
+                maxWidth: '100%',
+                overflowX: 'hidden',
+                overflowY: 'hidden',
+                margin: 0,
+                padding: 0,
+                '& .MuiPaper-root': {
+                    width: '100%',
+                    maxWidth: '100%',
+                    margin: 0,
+                    padding: 0,
+                    overflowX: 'hidden',
+                }
+            }}
         >
-            <Table>
+            <Table
+                sx={{
+                    width: '100%',
+                    tableLayout: 'auto',
+                }}
+            >
                 <TableHead>
                     <TableRow>
                         {TABLE_COLUMNS.map((column) => (

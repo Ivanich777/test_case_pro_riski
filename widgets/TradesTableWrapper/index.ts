@@ -1,0 +1,2 @@
+export { TradesTableWrapper } from './TradesTableWrapper';
+

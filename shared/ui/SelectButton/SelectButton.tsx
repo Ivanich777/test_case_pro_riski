@@ -2,19 +2,22 @@ import React from 'react';
 import { Button, Menu, MenuItem } from '@mui/material';
 import { useMenu } from '@/shared/hooks/useMenu';
 import styles from './SelectButton.module.scss';
+import cn from 'classnames';
 
 interface ISelectButtonProps {
     label: string;
     options: Array<{ value: string; label: string }>;
     value?: string;
     onChange?: (value: string) => void;
+    disabled?: boolean;
 }
 
 export const SelectButton: React.FC<ISelectButtonProps> = ({
     label,
     options,
     value,
-    onChange
+    onChange,
+    disabled = false
 }) => {
     const { anchorEl, open, handleOpen, handleClose } = useMenu();
 
@@ -25,12 +28,17 @@ export const SelectButton: React.FC<ISelectButtonProps> = ({
 
     const selectedOption = options.find(opt => opt.value === value);
     const displayLabel = selectedOption ? selectedOption.label : label;
+    const isSelected = value !== undefined && value !== 'all';
 
     return (
         <>
             <Button
-                className={styles['select-button']}
+                className={cn(
+                    styles['select-button'],
+                    { [styles['select-button--active']]: isSelected }
+                )}
                 onClick={handleOpen}
+                disabled={disabled}
                 endIcon={
                     <svg
                         width="10"
