@@ -34,12 +34,18 @@ export const TradesTable: React.FC<ITradesTableProps> = ({ trades }) => {
                 overflowY: 'hidden',
                 margin: 0,
                 padding: 0,
+                '@media (max-width: 1800px)': {
+                    overflowX: 'auto',
+                },
                 '& .MuiPaper-root': {
                     width: '100%',
                     maxWidth: '100%',
                     margin: 0,
                     padding: 0,
                     overflowX: 'hidden',
+                    '@media (max-width: 1800px)': {
+                        overflowX: 'auto',
+                    },
                 }
             }}
         >

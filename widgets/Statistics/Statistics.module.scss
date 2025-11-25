@@ -24,5 +24,15 @@
 
 .statistics__item {
     flex-shrink: 0;
+
+    @include tablet {
+        flex: 1 1 calc(50% - 0.5rem);
+        min-width: 0;
+    }
+
+    @include mobile {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
 }
 

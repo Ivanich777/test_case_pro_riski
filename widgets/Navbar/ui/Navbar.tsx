@@ -5,12 +5,17 @@ import { NavLink } from './components/NavLink/NavLink';
 import { useTranslations } from "next-intl";
 import { AppRoutes } from '@/shared/lib/routes';
 import styles from './Navbar.module.scss';
+import cn from 'classnames';
 
-export const Navbar = () => {
+interface INavbarProps {
+    className?: string;
+}
+
+export const Navbar = ({ className }: INavbarProps) => {
     const t = useTranslations('common');
 
     return (
-        <Box className={styles['navbar']}>
+        <Box className={cn(styles['navbar'], className)}>
             <NavLink
                 href={AppRoutes.SIMULATOR}
                 label={t('simulator')}

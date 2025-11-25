@@ -87,14 +87,34 @@
 }
 
 @include tablet {
+    .statistics-card {
+        width: 100%;
+        max-width: 100%;
+
+        &--double {
+            width: 100%;
+        }
+    }
+
     .statistics-card__content {
         padding: 1rem;
+        width: 100%;
     }
 }
 
 @include mobile {
+    .statistics-card {
+        width: 100%;
+        max-width: 100%;
+
+        &--double {
+            width: 100%;
+        }
+    }
+
     .statistics-card__content {
         padding: 0.875rem;
         gap: 0.5rem;
+        width: 100%;
     }
 }
