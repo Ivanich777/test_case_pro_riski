@@ -1,93 +1,134 @@
-import { useTranslations, useLocale } from 'next-intl';
-import { Trade, TradePosition, TradeStrategy } from '@/shared/types/trade';
-import { formatDate, formatID, formatNumber, formatCurrency } from '@/shared/lib/formatters';
+import { useTranslations } from 'next-intl';
+import { Trade } from '@/shared/types/trade';
+
+export interface ProcessedTrade {
+    formattedId: string;
+    dateParts: {
+        date: string;
+        time: string;
+    };
+    positionLabel: string;
+    formattedResultUSDT: string;
+    takes: number;
+    resultColorType: 'positive' | 'negative';
+    formattedEntryPrice: string;
+    formattedStopLoss: string;
+    formattedQuantity: string;
+    formattedAmountUSDT: string;
+    formattedTake: string;
+    takeRatio: string;
+    strategyLabel: string;
+    formattedDeposit: string;
+    formattedRiskPercent: string;
+    formattedRating: string;
+    ratingType: 'high' | 'low';
+}
+
+const formatNumber = (value: number, decimals: number = 2): string => {
+    return new Intl.NumberFormat('ru-RU', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+    }).format(value);
+};
+
+const formatDate = (date: Date): { date: string; time: string } => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    
+    return {
+        date: `${day}.${month}.${year}`,
+        time: `${hours}:${minutes}`
+    };
+};
+
+const calculateTakes = (resultUSDT: number, take: number, entryPrice: number): number => {
+    if (resultUSDT <= 0) {
+        return 0;
+    }
+    
+    const priceDiff = take - entryPrice;
+    if (priceDiff <= 0) return 0;
+    
+    const takes = Math.floor(resultUSDT / (priceDiff * 0.1));
+    return takes > 0 ? takes : 0;
+};
 
 export const useTradesTable = () => {
     const t = useTranslations('home');
-    const locale = useLocale();
-    const localeString = locale === 'ru' ? 'ru-RU' : 'en-US';
 
-    const calculateTakes = (resultUSDT: number): number => {
-        return resultUSDT > 0 ? 1 : -1;
-    };
-
-    const calculateTakeRatio = (entryPrice: number, take: number, stopLoss: number): string => {
-        const profit = take - entryPrice;
-        const loss = entryPrice - stopLoss;
-        if (loss === 0) return '0 к 1';
-        const ratio = Math.round(profit / loss);
-        return `${ratio} к 1`;
-    };
-
-    const getPositionLabel = (position: TradePosition): string => {
-        return t(`position.${position}`);
-    };
-
-    const getStrategyLabel = (strategy: TradeStrategy): string => {
-        return t(`strategy.${strategy}`);
-    };
-
-    const getResultColorType = (result: number): 'positive' | 'negative' => {
-        return result >= 0 ? 'positive' : 'negative';
-    };
-
-    const getRatingType = (rating: number): 'high' | 'low' => {
-        return rating >= 4 ? 'high' : 'low';
-    };
-
-    const formatTradeDate = (date: Date): { date: string; time: string } => {
-        const dateString = formatDate(date, localeString);
-        const parts = dateString.split('\n');
-        return {
-            date: parts[0],
-            time: parts[1]
-        };
-    };
-
-    const formatTradeNumber = (value: number, decimals: number = 2): string => {
-        return formatNumber(value, decimals, localeString);
-    };
-
-    const formatTradeCurrency = (value: number): string => {
-        return formatCurrency(value, localeString);
-    };
-
-    const processTrade = (trade: Trade) => {
-        const takes = calculateTakes(trade.resultUSDT);
-        const takeRatio = calculateTakeRatio(trade.entryPrice, trade.take, trade.stopLoss);
-        const resultColorType = getResultColorType(trade.resultUSDT);
-        const ratingType = getRatingType(trade.rating);
-        const { date, time } = formatTradeDate(trade.entryDate);
+    const processTrade = (trade: Trade): ProcessedTrade => {
+        const dateParts = formatDate(trade.entryDate);
+        
+        const positionLabel = t(`position.${trade.position}`);
+        const strategyLabel = t(`strategy.${trade.strategy}`);
+        
+        const formattedResultUSDT = `${trade.resultUSDT >= 0 ? '+' : ''}${formatNumber(trade.resultUSDT, 2)} USDT`;
+        const resultColorType = trade.resultUSDT >= 0 ? 'positive' : 'negative';
+        
+        const takes = calculateTakes(trade.resultUSDT, trade.take, trade.entryPrice);
+        
+        const formattedEntryPrice = formatNumber(trade.entryPrice, 2);
+        const formattedStopLoss = formatNumber(trade.stopLoss, 2);
+        const formattedQuantity = formatNumber(trade.quantity, 3);
+        const formattedAmountUSDT = `${formatNumber(trade.amountUSDT, 2)} USDT`;
+        const formattedTake = formatNumber(trade.take, 2);
+        
+        const takeRatio = trade.entryPrice > 0 
+            ? `${formatNumber((trade.take / trade.entryPrice - 1) * 100, 1)}%`
+            : '0%';
+        
+        const formattedDeposit = `${formatNumber(trade.deposit, 2)} USDT`;
+        const formattedRiskPercent = `${formatNumber(trade.riskPercent, 2)}%`;
+        const formattedRating = formatNumber(trade.rating, 1);
+        const ratingType = trade.rating >= 4 ? 'high' : 'low';
 
         return {
-            ...trade,
-            formattedId: formatID(trade.id),
-            dateParts: { date, time },
+            formattedId: trade.id,
+            dateParts,
+            positionLabel,
+            formattedResultUSDT,
             takes,
-            takeRatio,
             resultColorType,
-            ratingType,
-            positionLabel: getPositionLabel(trade.position),
-            strategyLabel: getStrategyLabel(trade.strategy),
-            formattedEntryPrice: formatTradeNumber(trade.entryPrice, 3),
-            formattedStopLoss: formatTradeNumber(trade.stopLoss, 3),
-            formattedQuantity: formatTradeNumber(trade.quantity, 2),
-            formattedAmountUSDT: formatTradeCurrency(trade.amountUSDT),
-            formattedTake: formatTradeNumber(trade.take, 4),
-            formattedDeposit: formatTradeCurrency(trade.deposit),
-            formattedRiskPercent: formatTradeNumber(trade.riskPercent, 1),
-            formattedRating: formatTradeNumber(trade.rating, 1),
-            formattedResultUSDT: formatTradeCurrency(trade.resultUSDT),
+            formattedEntryPrice,
+            formattedStopLoss,
+            formattedQuantity,
+            formattedAmountUSDT,
+            formattedTake,
+            takeRatio,
+            strategyLabel,
+            formattedDeposit,
+            formattedRiskPercent,
+            formattedRating,
+            ratingType
         };
+    };
+
+    const getTakesLabel = (takes: number): string => {
+        const absTakes = Math.abs(takes);
+        const lastDigit = absTakes % 10;
+        const lastTwoDigits = absTakes % 100;
+        
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+            return t('table.takesPlural');
+        }
+        
+        if (lastDigit === 1) {
+            return t('table.takes');
+        }
+        
+        if (lastDigit >= 2 && lastDigit <= 4) {
+            return t('table.takesPlural');
+        }
+        
+        return t('table.takesPlural');
     };
 
     return {
         t,
-        localeString,
         processTrade,
-        getTakesLabel: (takes: number) => {
-            return takes === 1 ? t('table.takes') : t('table.takesPlural');
-        }
+        getTakesLabel
     };
 };
-

@@ -15,17 +15,17 @@ const generateTrade = (id: number): Trade => {
     const position = Math.random() > 0.5 ? TradePosition.LONG : TradePosition.SHORT;
     const instrument = INSTRUMENTS[Math.floor(Math.random() * INSTRUMENTS.length)];
     const strategy = STRATEGIES[Math.floor(Math.random() * STRATEGIES.length)];
-    
+
     const entryPrice = Math.random() * 100000 + 1000;
     const quantity = Math.random() * 10 + 0.1;
     const amountUSDT = entryPrice * quantity;
     const deposit = amountUSDT * (0.5 + Math.random() * 0.5);
     const riskPercent = Math.random() * 5 + 0.5;
-    
-    const resultUSDT = (Math.random() - 0.3) * 1000; // Может быть отрицательным
+
+    const resultUSDT = (Math.random() - 0.3) * 1000;
     const stopLoss = entryPrice * (0.9 + Math.random() * 0.1);
     const take = entryPrice * (1.05 + Math.random() * 0.15);
-    const rating = Math.random() * 3 + 2; // От 2 до 5
+    const rating = Math.random() * 3 + 2;
 
     return {
         id: `TRADE-${String(id).padStart(6, '0')}`,
@@ -33,7 +33,7 @@ const generateTrade = (id: number): Trade => {
         instrument,
         position,
         resultUSDT: Math.round(resultUSDT * 100) / 100,
-        peakPercent: 100, // Всегда 100 из 100%
+        peakPercent: 100, /* Пусть пока останется 100 из 100 */
         entryPrice: Math.round(entryPrice * 100) / 100,
         stopLoss: Math.round(stopLoss * 100) / 100,
         quantity: Math.round(quantity * 1000) / 1000,

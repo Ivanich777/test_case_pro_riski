@@ -41,8 +41,12 @@ export interface PaginationParams {
     pageSize: number;
 }
 
+export interface SerializedTrade extends Omit<Trade, 'entryDate'> {
+    entryDate: string;
+}
+
 export interface TradesResponse {
-    trades: Trade[];
+    trades: SerializedTrade[];
     total: number;
     page: number;
     pageSize: number;

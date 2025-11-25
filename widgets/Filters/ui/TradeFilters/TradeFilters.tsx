@@ -96,18 +96,21 @@ export const TradeFilters: React.FC<ITradeFiltersProps> = ({
                 options={dealTypeOptions}
                 value={filters.dealType}
                 onChange={(value) => handleFilterChange('dealType', value)}
+                disabled={true}
             />
             <SelectButton
                 label={t('tradeType')}
                 options={tradeTypeOptions}
                 value={filters.tradeType}
                 onChange={(value) => handleFilterChange('tradeType', value)}
+                disabled={true}
             />
             <SelectButton
                 label={t('dealStatus')}
                 options={dealStatusOptions}
                 value={filters.dealStatus}
                 onChange={(value) => handleFilterChange('dealStatus', value)}
+                disabled={true}
             />
             <SelectButton
                 label={t('strategy')}

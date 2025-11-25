@@ -1,19 +1,19 @@
 'use client';
 
+import { observer } from 'mobx-react-lite';
 import { DateRangeFilter, DateRangePreset } from '@/shared/ui/DateRangeFilter';
-import { useState } from 'react';
-import { TradeFilters } from '@/shared/types/trade';
+import { useStore } from '@/shared/stores';
 
 interface IDateRangeFilterWrapperProps {
     badgeValue?: number;
 }
 
-export const DateRangeFilterWrapper: React.FC<IDateRangeFilterWrapperProps> = ({ badgeValue }) => {
-    const [filters, setFilters] = useState<TradeFilters>({});
+export const DateRangeFilterWrapper: React.FC<IDateRangeFilterWrapperProps> = observer(({ badgeValue }) => {
+    const { tradesStore } = useStore();
 
     const handleDateRangeChange = (preset: DateRangePreset, dateFrom?: Date, dateTo?: Date) => {
-        setFilters({
-            ...filters,
+        tradesStore.setSelectedDatePreset(preset);
+        tradesStore.setFilters({
             dateFrom,
             dateTo
         });
@@ -21,10 +21,10 @@ export const DateRangeFilterWrapper: React.FC<IDateRangeFilterWrapperProps> = ({
 
     return (
         <DateRangeFilter
-            value="allTime"
+            value={tradesStore.selectedDatePreset}
             onChange={handleDateRangeChange}
             badgeValue={badgeValue}
         />
     );
-};
+});
 
