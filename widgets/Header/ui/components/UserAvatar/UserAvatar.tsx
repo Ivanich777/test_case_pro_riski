@@ -1,7 +1,7 @@
 import { Avatar, Badge } from "@mui/material";
 import styles from './UserAvatar.module.scss';
 
-export const UserAvatar = () => {
+export const UserAvatar: React.FC = () => {
     return (
         <Badge
             badgeContent={30}
@@ -16,6 +16,5 @@ export const UserAvatar = () => {
                 U
             </Avatar>
         </Badge>
-
     );
 };

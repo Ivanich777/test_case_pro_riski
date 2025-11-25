@@ -10,16 +10,12 @@ import {
     TableRow,
     Paper
 } from '@mui/material';
-import { Trade } from '@/shared/types/trade';
 import styles from './TradesTable.module.scss';
 import { useTradesTable } from './hooks/useTradesTable';
 import { TABLE_COLUMNS } from './config/tableConfig';
 import { TradeTableRow } from './components/TradeTableRow/TradeTableRow';
 import { ProcessedTrade } from './types';
-
-interface ITradesTableProps {
-    trades: Trade[];
-}
+import { ITradesTableProps } from './types';
 
 export const TradesTable: React.FC<ITradesTableProps> = ({ trades }) => {
     const { t, processTrade, getTakesLabel } = useTradesTable();

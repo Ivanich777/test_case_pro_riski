@@ -1,13 +1,13 @@
 import React from "react";
 
-interface IUseMenuValues {
+export interface IUseMenuReturn {
     anchorEl: null | HTMLElement;
     open: boolean;
     handleOpen: (event: React.MouseEvent<HTMLElement>) => void;
     handleClose: () => void;
 }
 
-export const useMenu = (): IUseMenuValues => {
+export const useMenu = (): IUseMenuReturn => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 

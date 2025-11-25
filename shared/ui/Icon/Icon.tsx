@@ -1,20 +1,8 @@
+import React from 'react';
 import Image from 'next/image';
+import { IIconProps } from './types';
 
-interface IconProps {
-    src: string;
-    width?: number;
-    height?: number;
-    alt?: string;
-    className?: string;
-}
-
-export const Icon = ({
-    src,
-    width = 20,
-    height = 20,
-    alt = 'Icon',
-    className
-}: IconProps) => {
+export const Icon: React.FC<IIconProps> = ({ src, width = 20, height = 20, alt = 'Icon', className }) => {
     return (
         <Image
             src={src}
@@ -24,5 +12,4 @@ export const Icon = ({
             className={className}
         />
     );
-};
-
+}

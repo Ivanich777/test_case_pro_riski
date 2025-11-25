@@ -1,7 +1,5 @@
 import React from 'react';
 import { TableRow, TableCell } from '@mui/material';
-import { Trade } from '@/shared/types/trade';
-import { ProcessedTrade } from '../../types';
 import styles from '../../TradesTable.module.scss';
 import { Icon } from '@/shared/ui/Icon';
 import { TableCellWithDate } from '../TableCellWithDate/TableCellWithDate';
@@ -11,12 +9,7 @@ import { TableCellWithAmount } from '../TableCellWithAmount/TableCellWithAmount'
 import { TableCellWithTake } from '../TableCellWithTake/TableCellWithTake';
 import { TableCellWithDeposit } from '../TableCellWithDeposit/TableCellWithDeposit';
 import { TableCellWithRating } from '../TableCellWithRating/TableCellWithRating';
-
-interface ITradeTableRowProps {
-    trade: Trade;
-    processed: ProcessedTrade;
-    getTakesLabel: (takes: number) => string;
-}
+import { ITradeTableRowProps } from './types';
 
 export const TradeTableRow: React.FC<ITradeTableRowProps> = React.memo(({
     trade,

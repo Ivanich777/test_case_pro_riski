@@ -1,8 +1,6 @@
-import { Icon } from '@/shared/ui/Icon'
+import { Icon } from '@/shared/ui/Icon';
 import buttonStyles from '@/shared/styles/components/navbar-button.module.scss';
-import cn from "classnames";
-import React from "react";
-
+import cn from 'classnames';
 
 interface IContentButtonProps {
     label: string;
@@ -10,9 +8,7 @@ interface IContentButtonProps {
     active?: boolean;
 }
 
-
-export const ButtonContent: React.FC<IContentButtonProps> = (props) => {
-    const { active, icon, label } = props;
+export function ButtonContent({ active, icon, label }: IContentButtonProps) {
 
     return (
         <>
@@ -28,6 +24,6 @@ export const ButtonContent: React.FC<IContentButtonProps> = (props) => {
             />
             <span className={buttonStyles['navbar-button__label']}>{label}</span>
         </>
-    )
-};
+    );
+}
 

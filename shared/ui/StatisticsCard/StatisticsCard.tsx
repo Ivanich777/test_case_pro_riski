@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { Card, CardContent as MuiCardContent, Box } from '@mui/material';
-import { StatisticsCard as StatisticsCardType, AdditionalInfo as AdditionalInfoType } from '@/shared/types/statistics';
+import { AdditionalInfo as AdditionalInfoType } from '@/shared/types/statistics';
 import styles from './StatisticsCard.module.scss';
 import cn from 'classnames';
 import { useTranslations } from 'next-intl';
@@ -8,10 +8,7 @@ import { Icon } from '@/shared/ui/Icon';
 import { AdditionalInfo } from '@/shared/ui/AdditionalInfo';
 import { CardContent } from '@/shared/ui/CardContent';
 import { CardText } from './components/CardText';
-
-interface IStatisticsCardProps {
-    card: StatisticsCardType;
-}
+import { IStatisticsCardProps } from './types';
 
 const getValueColor = (changeType: 'positive' | 'negative' | 'neutral' = 'neutral'): string => {
     switch (changeType) {
@@ -80,7 +77,7 @@ export const StatisticsCard: React.FC<IStatisticsCardProps> = ({ card }) => {
             minimumFractionDigits: 1,
             maximumFractionDigits: 1
         }).format(val);
-    }, [showAsPercentage, currency]);
+    }, [t, showAsPercentage, currency]);
 
     const valueColor = useMemo(() => getValueColor(changeType), [changeType]);
     const formattedValue = useMemo(() => formatValue(value), [formatValue, value]);

@@ -1,2 +1,2 @@
-export { TradeFilters } from './TradeFilters';
+export { TradeFilters } from '@/shared/ui/TradeFilters';
 

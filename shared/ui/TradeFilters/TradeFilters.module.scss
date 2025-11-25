@@ -1,0 +1,18 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
+
+.trade-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @include tablet {
+        gap: 6px;
+    }
+
+    @include mobile {
+        gap: 6px;
+    }
+}
+

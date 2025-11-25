@@ -1,11 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import styles from './CardContent.module.scss';
-
-interface ICardContentProps {
-    main: React.ReactNode;
-    additional?: React.ReactNode;
-}
+import { ICardContentProps } from './types';
 
 export const CardContent: React.FC<ICardContentProps> = ({ main, additional }) => {
     return (
