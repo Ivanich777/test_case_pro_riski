@@ -1,0 +1,32 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
+
+.direction-filter {
+    display: flex;
+    align-items: center;
+}
+
+.direction-filter__group {
+    .MuiToggleButton-root {
+        text-transform: none;
+        font-weight: 400;
+        padding: 6px 16px;
+        border-color: $divider-color;
+
+        &.Mui-selected {
+            background-color: $primary-color;
+            color: white;
+            border-color: $primary-color;
+
+            &:hover {
+                background-color: $primary-dark;
+                border-color: $primary-dark;
+            }
+        }
+
+        &:hover {
+            background-color: $action-hover;
+        }
+    }
+}
+

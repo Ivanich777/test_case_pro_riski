@@ -6,6 +6,7 @@ import { Container, Box, Typography } from '@mui/material';
 import { getTranslations } from 'next-intl/server';
 import styles from './MainPage.module.scss';
 import { DateRangeFilterWrapper } from '@/widgets/Filters/ui/DateRangeFilterWrapper';
+import { TradeFiltersWrapper } from '@/widgets/Filters/ui/TradeFiltersWrapper';
 
 export default async function Main() {
   const t = await getTranslations('home');
@@ -25,6 +26,9 @@ export default async function Main() {
       </Box>
       <Box className={styles['main-page-section']}>
         <DateRangeFilterWrapper badgeValue={13} />
+      </Box>
+      <Box className={styles['main-page-section']}>
+        <TradeFiltersWrapper />
       </Box>
       <Box>
         <Statistics cards={MOCK_STATISTICS.cards} />

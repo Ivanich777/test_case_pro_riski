@@ -1,0 +1,29 @@
+@use '@/shared/styles/variables' as *;
+
+.select-button {
+    height: 28px;
+    min-width: 90px;
+    width: auto;
+    padding: 8px 12px !important;
+    border-radius: 100px !important;
+    background-color: $card-background !important;
+    color: $text-primary !important;
+    font-family: $font-family-inter !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    text-transform: none !important;
+    gap: 2px !important;
+    box-shadow: none !important;
+    border: none !important;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: $card-background !important;
+    }
+
+    &__icon {
+        margin-left: 2px;
+        flex-shrink: 0;
+    }
+}
+
