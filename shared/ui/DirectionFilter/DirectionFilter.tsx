@@ -37,7 +37,7 @@ export const DirectionFilter: React.FC<IDirectionFilterProps> = ({
                 size="small"
                 className={styles['direction-filter__group']}
             >
-                <ToggleButton value={null} aria-label="all">
+                <ToggleButton value="" aria-label="all">
                     {labelAll}
                 </ToggleButton>
                 <ToggleButton value={TradePosition.LONG} aria-label="buy">

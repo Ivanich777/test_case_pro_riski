@@ -1,36 +1,204 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pro Riski Test Case
 
-## Getting Started
+Торговый дашборд для отслеживания сделок и статистики. Построен на Next.js 16 с TypeScript, MobX и Material-UI.
 
-First, run the development server:
+## Технологии
+
+- **Next.js 16** — App Router, SSR, ISR
+- **React 19** — с Server Components
+- **TypeScript** — строгая типизация
+- **MobX** — стейт-менеджмент
+- **Material-UI v7** — компоненты и темизация
+- **next-intl** — интернационализация (ru/en)
+- **SCSS** — стили с модулями
+
+## Быстрый старт
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Открой [http://localhost:3000](http://localhost:3000). По умолчанию откроется русская версия, английская доступна по `/en`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Структура проекта
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Проект следует Feature-Sliced Design:
 
-## Learn More
+```
+app/                    # Роутинг и страницы (Next.js App Router)
+  [locale]/            # Локализованные страницы
+    page.tsx           # Главная страница со статистикой
+    layout.tsx         # Лейаут с провайдерами
 
-To learn more about Next.js, take a look at the following resources:
+shared/                # Переиспользуемый код
+  ui/                  # UI компоненты (Button, Table, Card и т.д.)
+  hooks/               # Кастомные хуки (useDateRange, useTradeFilters)
+  stores/              # MobX сторы (TradesStore)
+  types/               # TypeScript типы
+  lib/                 # Утилиты (formatters, routes)
+  config/              # Конфигурации (фильтры, таблицы)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+widgets/               # Составные компоненты
+  Header/              # Шапка с навигацией
+  Statistics/          # Блок статистики
+  Filters/             # Фильтры сделок
+  TradesTableWrapper/  # Обертка таблицы с пагинацией
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+messages/              # Переводы (ru/en)
+theme/                 # MUI тема
+```
 
-## Deploy on Vercel
+## Основные фичи
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Статистика сделок
+- Карточки с метриками (рейтинг, прибыль, количество сделок)
+- Фильтрация по датам (сегодня, неделя, месяц, все время)
+- Фильтры по инструментам, направлениям, стратегиям
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Таблица сделок
+- Пагинация
+- Сортировка и фильтрация
+- Адаптивная верстка с горизонтальным скроллом на мобильных
+
+### Интернационализация
+- Русский и английский языки
+- Переключение через меню или мобильный drawer
+- SEO-оптимизированные мета-теги для каждого языка
+
+## Архитектура
+
+### Стейт-менеджмент
+
+Используется MobX с единым `RootStore`:
+
+```typescript
+const { tradesStore } = useStore();
+tradesStore.fetchTrades();
+tradesStore.setPage(2);
+```
+
+`TradesStore` управляет:
+- Списком сделок
+- Фильтрами (даты, инструменты, стратегии)
+- Пагинацией
+- Состоянием загрузки
+
+### Компоненты
+
+Все компоненты типизированы через `React.FC<IComponentProps>`. Пропсы вынесены в `types.ts`:
+
+```typescript
+// shared/ui/Button/types.ts
+export interface IButtonProps {
+  label: string;
+  onClick: () => void;
+}
+
+// shared/ui/Button/Button.tsx
+export const Button: React.FC<IButtonProps> = ({ label, onClick }) => {
+  // ...
+};
+```
+
+### Хуки
+
+Бизнес-логика вынесена в кастомные хуки:
+
+- `useDateRange` — работа с диапазонами дат
+- `useTradeFilters` — логика фильтров
+- `useTradesTable` — форматирование данных таблицы
+- `useMenu` — управление меню/дропдаунами
+
+### Оптимизация
+
+- **Мемоизация**: `useMemo`, `useCallback` для тяжелых вычислений
+- **React.memo**: для компонентов таблицы
+- **ISR**: главная страница кэшируется на 15 минут (`revalidate: 900`)
+- **SSR**: метаданные генерируются на сервере для SEO
+
+## Стили
+
+SCSS модули с миксинами для адаптивности:
+
+```scss
+@include mobile {
+  // стили для мобильных
+}
+
+@include tablet {
+  // стили для планшетов
+}
+```
+
+Брейкпоинты:
+- Mobile: до 768px
+- Tablet: 768px - 1024px
+- Desktop: от 1024px
+
+## Разработка
+
+### Добавление нового компонента
+
+1. Создай папку в `shared/ui/` или `widgets/`
+2. Создай файлы: `ComponentName.tsx`, `ComponentName.module.scss`, `types.ts`, `index.ts`
+3. Экспортируй через `index.ts`
+
+### Добавление перевода
+
+Добавь ключи в `messages/ru/` и `messages/en/`:
+
+```json
+{
+  "newKey": "Новое значение"
+}
+```
+
+Используй в компоненте:
+
+```typescript
+const t = useTranslations('namespace');
+t('newKey');
+```
+
+### Работа со стором
+
+Добавь новый стор в `shared/stores/`:
+
+```typescript
+export class NewStore {
+  @observable data = [];
+  
+  @action
+  fetchData() {
+    // логика
+  }
+}
+```
+
+Зарегистрируй в `RootStore.ts`.
+
+## Сборка
+
+```bash
+npm run build
+npm start
+```
+
+Проект собирается в статику с ISR для главной страницы.
+
+## Что можно улучшить
+
+- [ ] Допилить туду
+- [ ] Полностью избавиться от инлайн
+- [ ] Избавиться от MUI на свой ui кит
+- [ ] Добавить тесты (Jest + React Testing Library)
+- [ ] Настроить CI/CD
+- [ ] Добавить Storybook для компонентов
+- [ ] Реализовать реальный API вместо моков
+- [ ] Добавить E2E тесты (Playwright)
+- [ ] Настроить мониторинг ошибок (Sentry)
+
+## Лицензия
+
+Private

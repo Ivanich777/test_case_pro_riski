@@ -10,6 +10,7 @@ import {
     TableRow,
     Paper
 } from '@mui/material';
+import { Trade } from '@/shared/types/trade';
 import styles from './TradesTable.module.scss';
 import { useTradesTable } from './hooks/useTradesTable';
 import { TABLE_COLUMNS } from './config/tableConfig';

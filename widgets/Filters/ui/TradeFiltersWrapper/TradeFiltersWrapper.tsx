@@ -32,8 +32,8 @@ export const TradeFiltersWrapper: React.FC = observer(() => {
         <TradeFilters
             filters={{
                 instrument: tradesStore.filters.instrument,
-                direction: tradesStore.filters.position,
-                strategy: tradesStore.filters.strategy
+                direction: tradesStore.filters.position || undefined,
+                strategy: tradesStore.filters.strategy || undefined
             }}
             onFiltersChange={handleFiltersChange}
         />
