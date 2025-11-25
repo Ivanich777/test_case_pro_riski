@@ -1,3 +1,70 @@
 {
-    "title": "Общая статистика"
+    "title": "Общая статистика",
+    "filters": "Фильтры",
+    "dateFrom": "Дата от",
+    "dateTo": "Дата до",
+    "dateFilter": {
+        "today": "Сегодня",
+        "yesterday": "Вчера",
+        "week": "Неделя",
+        "currentMonth": "Текущий месяц",
+        "allTime": "Все время",
+        "customRange": "Выбор диапазона"
+    },
+    "direction": "Направление",
+    "all": "Все",
+    "buy": "Покупка",
+    "sell": "Продажа",
+    "reset": "Сбросить",
+    "table": {
+        "id": "ID",
+        "entryDate": "Дата входа",
+        "instrument": "Инструмент",
+        "resultUSDT": "Итог, USDT",
+        "peakPercent": "Пик в %",
+        "entryPrice": "Цена входа",
+        "stopLoss": "Стоп лосс",
+        "quantity": "Кол-во монет",
+        "amountUSDT": "На сумму, USDT",
+        "take": "Тейк",
+        "strategy": "Стратегия",
+        "deposit": "Депозит",
+        "riskPercent": "% риска",
+        "chart": "График",
+        "rating": "Рейтинг",
+        "noData": "Нет данных",
+        "takes": "тейк",
+        "takesPlural": "тейка",
+        "to": "к"
+    },
+    "position": {
+        "long": "Long",
+        "short": "Short"
+    },
+    "strategy": {
+        "rebound": "Отбой от уровня",
+        "breakout": "Пробой уровня",
+        "moving": "Скользящие"
+    },
+    "status": {
+        "pending": "В обработке",
+        "completed": "Завершена",
+        "cancelled": "Отменена"
+    },
+    "pagination": {
+        "showing": "Показано {start} - {end} из {total}",
+        "page": "Страница",
+        "of": "из"
+    },
+    "statistics": {
+        "myRating": "Мой рейтинг",
+        "totalTrades": "Сделок",
+        "profitUSDT": "Прибыль, USDT",
+        "inProfit": "В плюсе",
+        "takes": "Тейки",
+        "averageProfit": "Ср. прибыль",
+        "rating": "Рейтинг",
+        "additionalTakes": "+3 тейка",
+        "ratingPlace": "884 место"
+    }
 }

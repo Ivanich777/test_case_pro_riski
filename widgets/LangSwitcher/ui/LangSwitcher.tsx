@@ -8,23 +8,18 @@ import React from "react";
 import { NavigationLink } from "@/widgets/LangSwitcher/ui/components/NavigationLink/NavigationLink";
 import { LOCALES, isActiveLocale } from "@/shared/lib/localeUtils";
 import { useMenu } from "@/shared/hooks/useMenu";
+import cn from 'classnames';
 
 interface ILangSwitcherProps {
     icon: string
 }
 
-const getMenuItemStyles = (isActive: boolean) => ({
-    fontWeight: isActive ? 'bold' : 'normal',
-    backgroundColor: isActive ? 'action.selected' : 'transparent',
-    '&.Mui-disabled': { opacity: 1 }
-});
 
 export const LangSwitcher: React.FC<ILangSwitcherProps> = (props) => {
     const { icon } = props;
     const { anchorEl, open, handleOpen, handleClose } = useMenu();
     const t = useTranslations('common');
     const currentLocale = useLocale();
-
 
     return (
         <div className={styles['lang-switcher']}>
@@ -38,6 +33,7 @@ export const LangSwitcher: React.FC<ILangSwitcherProps> = (props) => {
                     width={20}
                     height={20}
                     alt={t('language')}
+                    className={styles['lang-switcher__icon']}
                 />
                 <span className={styles['lang-switcher__label']}>
                     {t('language')}
@@ -56,7 +52,9 @@ export const LangSwitcher: React.FC<ILangSwitcherProps> = (props) => {
                         <MenuItem
                             key={locale.code}
                             disabled={isActive}
-                            sx={getMenuItemStyles(isActive)}
+                            className={cn(styles['lang-switcher__menu-item'], {
+                                [styles['lang-switcher__menu-item--active']]: isActive
+                            })}
                         >
                             <NavigationLink
                                 locale={locale.code}

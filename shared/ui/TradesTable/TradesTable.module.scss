@@ -1,0 +1,222 @@
+@use '@/shared/styles/variables' as *;
+
+.trades-table {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+    box-shadow: none !important;
+    border: none !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    & .MuiPaper-root {
+        box-shadow: none !important;
+        border: none !important;
+        overflow-x: auto !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    & table {
+        width: 100%;
+    }
+}
+
+.trades-table__header {
+    font-family: $font-family-inter;
+    font-weight: 500;
+    font-size: 14px;
+    color: $text-secondary !important;
+    border-bottom: 1px solid $divider-color;
+    height: 46px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    & .MuiTableCell-root {
+        color: $text-secondary !important;
+        height: 46px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.trades-table__row {
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+    
+    & td {
+        font-family: $font-family-inter;
+        font-weight: 400;
+        font-size: 14px;
+        color: $text-primary;
+        border-bottom: 1px solid $divider-color;
+        height: 46px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.trades-table__empty {
+    padding: 3rem;
+    color: $text-secondary;
+}
+
+.trades-table__id {
+    font-family: $font-family-inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-secondary !important;
+}
+
+.trades-table__result-value {
+    &[data-color="positive"] {
+        color: #329A85 !important;
+    }
+    
+    &[data-color="negative"] {
+        color: #E25E42 !important;
+    }
+}
+
+
+.trades-table__rating-value {
+    &[data-rating="high"] {
+        color: #329A85 !important;
+    }
+    
+    &[data-rating="low"] {
+        color: #1F2423 !important;
+    }
+}
+
+.trades-table__date {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: $font-family-inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-primary;
+}
+
+%secondary-value-base {
+    font-size: 12px;
+    color: $text-secondary;
+    background-color: $card-background;
+    padding: 1px 3px;
+    border-radius: $border-radius-xs;
+    display: inline-block;
+    width: fit-content;
+}
+
+.trades-table__date-time {
+    @extend %secondary-value-base;
+}
+
+.trades-table__instrument {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: $font-family-inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-primary;
+}
+
+.trades-table__position {
+    @extend %secondary-value-base;
+    font-weight: 500;
+    
+    &[data-position="long"] {
+        color: #329A85 !important;
+    }
+    
+    &[data-position="short"] {
+        color: #E25E42 !important;
+    }
+}
+
+.trades-table__result {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: $font-family-inter;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.trades-table__takes {
+    @extend %secondary-value-base;
+    
+    &[data-color="positive"] {
+        color: #329A85 !important;
+    }
+    
+    &[data-color="negative"] {
+        color: #E25E42 !important;
+    }
+}
+
+.trades-table__peak {
+    font-family: $font-family-inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-primary;
+}
+
+.trades-table__amount {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: $font-family-inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-primary;
+}
+
+.trades-table__multiplier {
+    @extend %secondary-value-base;
+}
+
+.trades-table__take {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: $font-family-inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-primary;
+}
+
+.trades-table__ratio {
+    @extend %secondary-value-base;
+}
+
+.trades-table__strategy {
+    font-family: $font-family-inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-primary;
+}
+
+.trades-table__deposit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-family-inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-primary;
+}
+
+.trades-table__separator {
+    color: $text-secondary;
+}

@@ -1,0 +1,18 @@
+@use '@/shared/styles/variables' as *;
+
+.header {
+
+}
+
+.header__toolbar {
+    height: 80px;
+}
+
+.header__actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 100%;
+}
+

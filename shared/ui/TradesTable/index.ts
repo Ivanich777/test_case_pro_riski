@@ -1,0 +1,2 @@
+export { TradesTable } from './TradesTable';
+

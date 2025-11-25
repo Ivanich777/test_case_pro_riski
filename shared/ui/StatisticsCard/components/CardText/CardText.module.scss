@@ -1,0 +1,31 @@
+@use '@/shared/styles/variables' as *;
+
+.card-text {
+    font-family: $font-family-inter;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    &::selection {
+        background: transparent;
+    }
+
+    &::-moz-selection {
+        background: transparent;
+    }
+
+    &--title {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 121%;
+        color: $text-secondary;
+    }
+
+    &--value {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 100%;
+    }
+}
+

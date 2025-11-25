@@ -4,31 +4,59 @@
 .lang-switcher {
     display: flex;
     align-items: center;
-    transition: filter $transition-slow;
-
-    &:hover {
-        filter: $icon-primary-filter;
-    }
 }
 
 .lang-switcher__button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgb(224, 224, 224);
-    border-radius: 4px;
-    background-color: transparent;
-    min-width: auto;
-    width: auto;
-    height: auto;
-    padding: 4px 8px;
-    gap: 2px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: $border-radius-sm !important;
+    background-color: transparent !important;
+    min-width: auto !important;
+    width: auto !important;
+    height: $button-height !important;
+    padding: 4px 8px !important;
+    gap: 2px !important;
+    transition: 
+        background-color $transition-normal,
+        border-color $transition-normal,
+        color $transition-normal !important;
+
+    &:hover {
+        background-color: $action-hover !important;
+        border-radius: $border-radius-sm !important;
+        border: 1px solid $primary-color !important;
+        
+        .lang-switcher__icon {
+            filter: $icon-primary-filter;
+        }
+        
+        .lang-switcher__label {
+            color: $primary-color;
+        }
+    }
+}
+
+.lang-switcher__icon {
+    display: block;
+    transition: filter $transition-slow;
 }
 
 .lang-switcher__label {
     @include navTypography;
     color: inherit;
     white-space: nowrap;
+    transition: color $transition-normal;
 }
 
+.lang-switcher__menu-item {
+    &--active {
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    &.Mui-disabled {
+        opacity: 1;
+    }
+}

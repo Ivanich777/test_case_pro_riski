@@ -1,3 +1,70 @@
 {
-    "title": "General statistics"
+    "title": "General statistics",
+    "filters": "Filters",
+    "dateFrom": "Date from",
+    "dateTo": "Date to",
+    "dateFilter": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "week": "Week",
+        "currentMonth": "Current month",
+        "allTime": "All time",
+        "customRange": "Custom range"
+    },
+    "direction": "Direction",
+    "all": "All",
+    "buy": "Buy",
+    "sell": "Sell",
+    "reset": "Reset",
+    "table": {
+        "id": "ID",
+        "entryDate": "Entry date",
+        "instrument": "Instrument",
+        "resultUSDT": "Result, USDT",
+        "peakPercent": "Peak %",
+        "entryPrice": "Entry price",
+        "stopLoss": "Stop loss",
+        "quantity": "Coins",
+        "amountUSDT": "Amount, USDT",
+        "take": "Take",
+        "strategy": "Strategy",
+        "deposit": "Deposit",
+        "riskPercent": "Risk %",
+        "chart": "Chart",
+        "rating": "Rating",
+        "noData": "No data",
+        "takes": "take",
+        "takesPlural": "takes",
+        "to": "to"
+    },
+    "position": {
+        "long": "Long",
+        "short": "Short"
+    },
+    "strategy": {
+        "rebound": "Rebound from level",
+        "breakout": "Breakout",
+        "moving": "Moving average"
+    },
+    "status": {
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+    },
+    "pagination": {
+        "showing": "Showing {start} - {end} of {total}",
+        "page": "Page",
+        "of": "of"
+    },
+    "statistics": {
+        "myRating": "My rating",
+        "totalTrades": "Trades",
+        "profitUSDT": "Profit, USDT",
+        "inProfit": "In profit",
+        "takes": "Takes",
+        "averageProfit": "Avg. profit",
+        "rating": "Rating",
+        "additionalTakes": "+3 takes",
+        "ratingPlace": "884 place"
+    }
 }
