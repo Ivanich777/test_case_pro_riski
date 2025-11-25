@@ -16,7 +16,7 @@
     -ms-user-select: none;
 
     &--double {
-        width: 151px;
+        min-width:165px;
     }
 
     &:hover {
@@ -50,12 +50,12 @@
 }
 
 .statistics-card__content {
-    padding: 10px 16px;
+    padding: 10px 16px !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: fit-content;
-    width: fit-content;
+    min-width: fit-content;
     gap: 24px;
 }
 

@@ -10,6 +10,7 @@ import { TableCellWithTake } from '../TableCellWithTake/TableCellWithTake';
 import { TableCellWithDeposit } from '../TableCellWithDeposit/TableCellWithDeposit';
 import { TableCellWithRating } from '../TableCellWithRating/TableCellWithRating';
 import { ITradeTableRowProps } from './types';
+import cn from "classnames";
 
 export const TradeTableRow: React.FC<ITradeTableRowProps> = React.memo(({
     trade,
@@ -40,7 +41,11 @@ export const TradeTableRow: React.FC<ITradeTableRowProps> = React.memo(({
                 colorType={processed.resultColorType}
             />
             <TableCell className={styles['trades-table__peak']}>
+                <div className={styles['trades-table__peak-container']}>
+                    <span className={styles['trades-table__peak-text']}>
                 100 из 100%
+                    </span>
+                </div>
             </TableCell>
             <TableCell>{processed.formattedEntryPrice}</TableCell>
             <TableCell>{processed.formattedStopLoss}</TableCell>

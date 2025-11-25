@@ -15,7 +15,7 @@ export default async function LocaleLayout({
 
   return (
     <Providers locale={locale} messages={messages}>
-      <div className={styles['layout']} suppressHydrationWarning>
+      <div className={styles['layout']}>
         <Header />
         <main className={styles['layout__main']}>
           {children}
