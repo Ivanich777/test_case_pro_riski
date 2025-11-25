@@ -17,14 +17,14 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    
+
     & .MuiTableContainer-root {
         overflow-x: hidden !important;
         overflow-y: hidden !important;
         width: 100% !important;
         max-width: 100% !important;
     }
-    
+
     & .MuiPaper-root {
         box-shadow: none !important;
         border: none !important;
@@ -35,7 +35,7 @@
         margin: 0 !important;
         padding: 0 !important;
     }
-    
+
     & table {
         width: 100% !important;
         table-layout: auto;
@@ -45,11 +45,11 @@
 
     @media (max-width: 1800px) {
         overflow-x: auto !important;
-        
+
         & .MuiTableContainer-root {
             overflow-x: auto !important;
         }
-        
+
         & .MuiPaper-root {
             overflow-x: auto !important;
         }
@@ -75,7 +75,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 8px 16px !important;
-    
+
     & .MuiTableCell-root {
         color: $text-secondary !important;
         height: 46px !important;
@@ -90,7 +90,7 @@
     &:hover {
         background-color: rgba(0, 0, 0, 0.02);
     }
-    
+
     & td {
         font-family: $font-family-inter;
         font-weight: 400;
@@ -122,7 +122,7 @@
     &[data-color="positive"] {
         color: #329A85 !important;
     }
-    
+
     &[data-color="negative"] {
         color: #E25E42 !important;
     }
@@ -133,7 +133,7 @@
     &[data-rating="high"] {
         color: #329A85 !important;
     }
-    
+
     &[data-rating="low"] {
         color: #1F2423 !important;
     }
@@ -176,11 +176,11 @@
 .trades-table__position {
     @extend %secondary-value-base;
     font-weight: 500;
-    
+
     &[data-position="long"] {
         color: #329A85 !important;
     }
-    
+
     &[data-position="short"] {
         color: #E25E42 !important;
     }
@@ -197,21 +197,38 @@
 
 .trades-table__takes {
     @extend %secondary-value-base;
-    
+
     &[data-color="positive"] {
         color: #329A85 !important;
     }
-    
+
     &[data-color="negative"] {
         color: #E25E42 !important;
     }
 }
 
 .trades-table__peak {
-    font-family: $font-family-inter;
-    font-weight: 400;
-    font-size: 14px;
-    color: $text-primary;
+    text-align: right !important;
+
+}
+
+.trades-table__peak-container {
+    max-height: 18px;
+    background-color: #f0f5f4;
+    border-radius: 2px;
+    width: fit-content;
+}
+.trades-table__peak-text {
+    font-family: Inter, $font-family-inter !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 100% !important;
+    color: #329A85 !important;
+    background-color: #F0F5F4 !important;
+    padding: 2px 6px;
+    //border-radius: 2px;
+    display: inline-block;
+
 }
 
 .trades-table__amount {

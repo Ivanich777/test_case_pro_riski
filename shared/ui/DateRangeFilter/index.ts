@@ -1,3 +1,6 @@
 export { DateRangeFilter } from './DateRangeFilter';
-export type { DateRangePreset, IDateRangeFilterProps } from './types';
+export type {
+    DateRangePreset,
+    IDateRangeFilterProps
+} from './types';
 

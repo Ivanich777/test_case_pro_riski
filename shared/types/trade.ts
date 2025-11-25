@@ -12,20 +12,20 @@ export enum TradeStrategy {
 export interface Trade {
     id: string;
     entryDate: Date;
-    instrument: string; // BTC, TON, Griffan, Doge
-    position: TradePosition; // long/short
-    resultUSDT: number; // Итог USDT
-    peakPercent: number; // Пик в %
-    entryPrice: number; // Цена входа
-    stopLoss: number; // Стоп лосс
-    quantity: number; // Кол-во монет
-    amountUSDT: number; // На сумму USDT
-    take: number; // Тейк
-    strategy: TradeStrategy; // Стратегия
-    deposit: number; // Депозит
-    riskPercent: number; // % риска
-    chart?: string; // URL графика
-    rating: number; // Рейтинг
+    instrument: string;
+    position: TradePosition;
+    resultUSDT: number;
+    peakPercent: number;
+    entryPrice: number;
+    stopLoss: number;
+    quantity: number;
+    amountUSDT: number;
+    take: number;
+    strategy: TradeStrategy;
+    deposit: number;
+    riskPercent: number;
+    chart?: string;
+    rating: number;
 }
 
 export interface TradeFilters {
@@ -35,21 +35,3 @@ export interface TradeFilters {
     position?: TradePosition | null;
     strategy?: TradeStrategy | null;
 }
-
-export interface PaginationParams {
-    page: number;
-    pageSize: number;
-}
-
-export interface SerializedTrade extends Omit<Trade, 'entryDate'> {
-    entryDate: string;
-}
-
-export interface TradesResponse {
-    trades: SerializedTrade[];
-    total: number;
-    page: number;
-    pageSize: number;
-    totalPages: number;
-}
-
