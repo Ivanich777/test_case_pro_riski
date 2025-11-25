@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { useMemo, useCallback } from 'react';
 import { Trade } from '@/shared/types/trade';
 
 export interface ProcessedTrade {
@@ -59,7 +60,7 @@ const calculateTakes = (resultUSDT: number, take: number, entryPrice: number): n
 export const useTradesTable = () => {
     const t = useTranslations('home');
 
-    const processTrade = (trade: Trade): ProcessedTrade => {
+    const processTrade = useCallback((trade: Trade): ProcessedTrade => {
         const dateParts = formatDate(trade.entryDate);
         
         const positionLabel = t(`position.${trade.position}`);
@@ -104,9 +105,9 @@ export const useTradesTable = () => {
             formattedRating,
             ratingType
         };
-    };
+    }, [t]);
 
-    const getTakesLabel = (takes: number): string => {
+    const getTakesLabel = useCallback((takes: number): string => {
         const absTakes = Math.abs(takes);
         const lastDigit = absTakes % 10;
         const lastTwoDigits = absTakes % 100;
@@ -124,7 +125,7 @@ export const useTradesTable = () => {
         }
         
         return t('table.takesPlural');
-    };
+    }, [t]);
 
     return {
         t,

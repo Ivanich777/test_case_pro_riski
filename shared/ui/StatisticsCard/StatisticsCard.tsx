@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { Card, CardContent as MuiCardContent, Box } from '@mui/material';
 import { StatisticsCard as StatisticsCardType, AdditionalInfo as AdditionalInfoType } from '@/shared/types/statistics';
 import styles from './StatisticsCard.module.scss';
@@ -41,7 +41,7 @@ export const StatisticsCard: React.FC<IStatisticsCardProps> = ({ card }) => {
     } = card;
     const t = useTranslations('home');
 
-    const formatValue = (val: number | string): string => {
+    const formatValue = useCallback((val: number | string): string => {
         if (typeof val === 'string') {
             if (val.startsWith('statistics.')) {
                 return t(val as Parameters<typeof t>[0]);
@@ -80,9 +80,10 @@ export const StatisticsCard: React.FC<IStatisticsCardProps> = ({ card }) => {
             minimumFractionDigits: 1,
             maximumFractionDigits: 1
         }).format(val);
-    };
+    }, [showAsPercentage, currency]);
 
-    const valueColor = getValueColor(changeType);
+    const valueColor = useMemo(() => getValueColor(changeType), [changeType]);
+    const formattedValue = useMemo(() => formatValue(value), [formatValue, value]);
     const hasBadge = !!badgeColor;
     const badgeInAdditional = typeof additionalInfo === 'object' && additionalInfo?.badgeColor;
 
@@ -114,7 +115,7 @@ export const StatisticsCard: React.FC<IStatisticsCardProps> = ({ card }) => {
                     />
                 )}
                 <CardText variant="value" color={valueColor}>
-                    {formatValue(value)}
+                    {formattedValue}
                 </CardText>
                 {!isDoubleCard && additionalInfo && typeof additionalInfo === 'string' && (
                     <AdditionalInfo>

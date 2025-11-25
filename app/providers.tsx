@@ -13,8 +13,8 @@ export default function Providers({ children, locale, messages }: { children: Re
     return (
         <StoreProvider store={store}>
             <ThemeProvider theme={theme}>
+                <CssBaseline />
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    <CssBaseline />
                     {children}
                 </NextIntlClientProvider>
             </ThemeProvider>

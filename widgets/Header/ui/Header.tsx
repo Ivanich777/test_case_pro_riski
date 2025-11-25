@@ -23,7 +23,7 @@ export const Header = () => {
                 <Navbar className={styles['header__navbar--desktop']} />
                 <Box className={styles['header__actions']}>
                     <Box className={styles['header__lang-switcher--desktop']}>
-                        <LangSwitcher icon={'/assets/icons/locale.svg'} />
+                    <LangSwitcher icon={'/assets/icons/locale.svg'} />
                     </Box>
                     <QRButton />
                     <UserAvatar />

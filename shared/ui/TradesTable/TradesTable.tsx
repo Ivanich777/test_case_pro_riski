@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
     Table,
     TableBody,
@@ -15,6 +15,7 @@ import styles from './TradesTable.module.scss';
 import { useTradesTable } from './hooks/useTradesTable';
 import { TABLE_COLUMNS } from './config/tableConfig';
 import { TradeTableRow } from './components/TradeTableRow/TradeTableRow';
+import { ProcessedTrade } from './types';
 
 interface ITradesTableProps {
     trades: Trade[];
@@ -22,6 +23,13 @@ interface ITradesTableProps {
 
 export const TradesTable: React.FC<ITradesTableProps> = ({ trades }) => {
     const { t, processTrade, getTakesLabel } = useTradesTable();
+
+    const processedTrades = useMemo<Array<{ trade: Trade; processed: ProcessedTrade }>>(() => {
+        return trades.map(trade => ({
+            trade,
+            processed: processTrade(trade)
+        }));
+    }, [trades, processTrade]);
 
     return (
         <TableContainer
@@ -72,17 +80,14 @@ export const TradesTable: React.FC<ITradesTableProps> = ({ trades }) => {
                             </TableCell>
                         </TableRow>
                     ) : (
-                        trades.map((trade) => {
-                            const processed = processTrade(trade);
-                            return (
-                                <TradeTableRow
-                                    key={trade.id}
-                                    trade={trade}
-                                    processed={processed}
-                                    getTakesLabel={getTakesLabel}
-                                />
-                            );
-                        })
+                        processedTrades.map(({ trade, processed }) => (
+                            <TradeTableRow
+                                key={trade.id}
+                                trade={trade}
+                                processed={processed}
+                                getTakesLabel={getTakesLabel}
+                            />
+                        ))
                     )}
                 </TableBody>
             </Table>

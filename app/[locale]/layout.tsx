@@ -13,14 +13,14 @@ export default async function LocaleLayout({
     const { locale } = await params;
     const messages = await getMessages({ locale });
 
-    return (
-        <Providers locale={locale} messages={messages}>
-            <div className={styles['layout']}>
-                <Header />
-                <main className={styles['layout__main']}>
-                    {children}
-                </main>
-            </div>
-        </Providers>
-    );
+  return (
+    <Providers locale={locale} messages={messages}>
+      <div className={styles['layout']} suppressHydrationWarning>
+        <Header />
+        <main className={styles['layout__main']}>
+          {children}
+        </main>
+      </div>
+    </Providers>
+  );
 }

@@ -88,3 +88,5 @@ const calculateStatistics = (): Statistics => {
 
 export const MOCK_STATISTICS: Statistics = calculateStatistics();
 
+export { calculateStatistics };
+

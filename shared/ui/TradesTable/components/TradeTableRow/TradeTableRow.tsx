@@ -18,7 +18,7 @@ interface ITradeTableRowProps {
     getTakesLabel: (takes: number) => string;
 }
 
-export const TradeTableRow: React.FC<ITradeTableRowProps> = ({
+export const TradeTableRow: React.FC<ITradeTableRowProps> = React.memo(({
     trade,
     processed,
     getTakesLabel
@@ -78,5 +78,5 @@ export const TradeTableRow: React.FC<ITradeTableRowProps> = ({
             />
         </TableRow>
     );
-};
+});
 
