@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { TradesTable } from '@/shared/ui/TradesTable';
 import { Pagination } from '@/shared/ui/Pagination';
@@ -10,8 +10,14 @@ import { useStore } from '@/shared/stores';
 export const TradesTableWrapper: React.FC = observer(() => {
     const { tradesStore } = useStore();
 
-    const dateFromTime = tradesStore.filters.dateFrom?.getTime();
-    const dateToTime = tradesStore.filters.dateTo?.getTime();
+    const dateFromTime = useMemo(
+        () => tradesStore.filters.dateFrom?.getTime(),
+        [tradesStore.filters.dateFrom]
+    );
+    const dateToTime = useMemo(
+        () => tradesStore.filters.dateTo?.getTime(),
+        [tradesStore.filters.dateTo]
+    );
 
     useEffect(() => {
         tradesStore.fetchTrades();
@@ -25,9 +31,9 @@ export const TradesTableWrapper: React.FC = observer(() => {
         dateToTime
     ]);
 
-    const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
+    const handlePageChange = useCallback((_event: React.ChangeEvent<unknown>, page: number) => {
         tradesStore.setPage(page);
-    };
+    }, [tradesStore]);
 
     if (tradesStore.loading) {
         return <Box>Loading...</Box>;

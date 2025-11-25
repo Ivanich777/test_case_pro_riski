@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
     Table,
     TableBody,
@@ -10,18 +10,22 @@ import {
     TableRow,
     Paper
 } from '@mui/material';
-import { Trade } from '@/shared/types/trade';
 import styles from './TradesTable.module.scss';
 import { useTradesTable } from './hooks/useTradesTable';
 import { TABLE_COLUMNS } from './config/tableConfig';
 import { TradeTableRow } from './components/TradeTableRow/TradeTableRow';
-
-interface ITradesTableProps {
-    trades: Trade[];
-}
+import { ProcessedTrade } from './types';
+import { ITradesTableProps } from './types';
 
 export const TradesTable: React.FC<ITradesTableProps> = ({ trades }) => {
     const { t, processTrade, getTakesLabel } = useTradesTable();
+
+    const processedTrades = useMemo<Array<{ trade: Trade; processed: ProcessedTrade }>>(() => {
+        return trades.map(trade => ({
+            trade,
+            processed: processTrade(trade)
+        }));
+    }, [trades, processTrade]);
 
     return (
         <TableContainer
@@ -72,17 +76,14 @@ export const TradesTable: React.FC<ITradesTableProps> = ({ trades }) => {
                             </TableCell>
                         </TableRow>
                     ) : (
-                        trades.map((trade) => {
-                            const processed = processTrade(trade);
-                            return (
-                                <TradeTableRow
-                                    key={trade.id}
-                                    trade={trade}
-                                    processed={processed}
-                                    getTakesLabel={getTakesLabel}
-                                />
-                            );
-                        })
+                        processedTrades.map(({ trade, processed }) => (
+                            <TradeTableRow
+                                key={trade.id}
+                                trade={trade}
+                                processed={processed}
+                                getTakesLabel={getTakesLabel}
+                            />
+                        ))
                     )}
                 </TableBody>
             </Table>

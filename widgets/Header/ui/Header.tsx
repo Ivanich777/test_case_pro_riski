@@ -7,7 +7,7 @@ import { UserAvatar } from "./components/UserAvatar/UserAvatar";
 import { MobileMenu } from "./components/MobileMenu/MobileMenu";
 import styles from './Header.module.scss';
 
-export const Header = () => {
+export const Header: React.FC = () => {
     return (
         <AppBar
             position="static"
@@ -23,7 +23,7 @@ export const Header = () => {
                 <Navbar className={styles['header__navbar--desktop']} />
                 <Box className={styles['header__actions']}>
                     <Box className={styles['header__lang-switcher--desktop']}>
-                        <LangSwitcher icon={'/assets/icons/locale.svg'} />
+                    <LangSwitcher icon={'/assets/icons/locale.svg'} />
                     </Box>
                     <QRButton />
                     <UserAvatar />
@@ -31,5 +31,5 @@ export const Header = () => {
                 </Box>
             </Toolbar>
         </AppBar>
-    )
-}
+    );
+};

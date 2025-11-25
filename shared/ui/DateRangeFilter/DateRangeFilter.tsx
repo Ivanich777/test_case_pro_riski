@@ -1,72 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Box } from '@mui/material';
-import { useTranslations, useLocale } from 'next-intl';
+import { useDateRange } from '@/shared/hooks/useDateRange';
 import styles from './DateRangeFilter.module.scss';
 import cn from 'classnames';
+import { IDateRangeFilterProps, DateRangePreset } from './types';
 
-export type DateRangePreset = 'today' | 'yesterday' | 'week' | 'currentMonth' | 'allTime' | 'customRange';
+const PRESETS: DateRangePreset[] = ['today', 'yesterday', 'week', 'currentMonth', 'allTime'];
 
-interface IDateRangeFilterProps {
-    value?: DateRangePreset;
-    onChange: (preset: DateRangePreset, dateFrom?: Date, dateTo?: Date) => void;
-    badgeValue?: number;
-}
-
-const getDateRange = (preset: DateRangePreset): { from: Date; to: Date } | null => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    switch (preset) {
-        case 'today': {
-            const to = new Date(today);
-            to.setHours(23, 59, 59, 999);
-            return { from: today, to };
-        }
-        case 'yesterday': {
-            const from = new Date(today);
-            from.setDate(from.getDate() - 1);
-            const to = new Date(from);
-            to.setHours(23, 59, 59, 999);
-            return { from, to };
-        }
-        case 'week': {
-            const from = new Date(today);
-            from.setDate(from.getDate() - 7);
-            const to = new Date(today);
-            to.setHours(23, 59, 59, 999);
-            return { from, to };
-        }
-        case 'currentMonth': {
-            const from = new Date(today.getFullYear(), today.getMonth(), 1);
-            const to = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-            to.setHours(23, 59, 59, 999);
-            return { from, to };
-        }
-        case 'allTime':
-            return null;
-        case 'customRange':
-            return null;
-        default:
-            return null;
-    }
-};
-
-const getCurrentMonthName = (locale: string): string => {
-    const date = new Date();
-    return new Intl.DateTimeFormat(locale, { month: 'long' }).format(date);
-};
-
-export const DateRangeFilter: React.FC<IDateRangeFilterProps> = ({
-    value = 'allTime',
-    onChange,
-    badgeValue
-}) => {
-    const t = useTranslations('home');
-    const locale = useLocale();
-
-    const presets: DateRangePreset[] = ['today', 'yesterday', 'week', 'currentMonth', 'allTime'];
+export const DateRangeFilter: React.FC<IDateRangeFilterProps> = ({ value = 'allTime', onChange, badgeValue }) => {
+    const { getDateRange, getPresetLabel, formatBadgeValue } = useDateRange();
 
     const handlePresetClick = (preset: DateRangePreset) => {
         const range = getDateRange(preset);
@@ -77,24 +21,11 @@ export const DateRangeFilter: React.FC<IDateRangeFilterProps> = ({
         }
     };
 
-    const getPresetLabel = (preset: DateRangePreset): string => {
-        if (preset === 'currentMonth') {
-            return getCurrentMonthName(locale === 'ru' ? 'ru-RU' : 'en-US');
-        }
-        return t(`dateFilter.${preset}`);
-    };
-
-    const badgeColor = badgeValue !== undefined
-        ? (badgeValue >= 0 ? '#329A85' : '#E25E42')
-        : undefined;
-
-    const badgeText = badgeValue !== undefined
-        ? (badgeValue >= 0 ? `+${badgeValue}` : `${badgeValue}`)
-        : undefined;
+    const badgeText = useMemo(() => formatBadgeValue(badgeValue), [formatBadgeValue, badgeValue]);
 
     return (
         <Box className={styles['date-range-filter']}>
-            {presets.map((preset) => {
+            {PRESETS.map((preset) => {
                 const isActive = value === preset;
                 return (
                     <Box
@@ -122,4 +53,3 @@ export const DateRangeFilter: React.FC<IDateRangeFilterProps> = ({
         </Box>
     );
 };
-

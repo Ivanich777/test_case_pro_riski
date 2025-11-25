@@ -1,8 +1,9 @@
+import React from 'react';
 import { Link } from '@/i18n/routing';
 import { AppRoutes } from '@/shared/lib/routes';
 import { Icon } from '@/shared/ui/Icon';
 
-export const Logo = () => {
+export const Logo: React.FC = () => {
     return (
         <Link href={AppRoutes.HOME}>
             <Icon
@@ -12,6 +13,5 @@ export const Logo = () => {
                 alt="Logo"
             />
         </Link>
-    )
-}
-
+    );
+};

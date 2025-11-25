@@ -1,17 +1,15 @@
-'use client'
+'use client';
 
+import React from 'react';
 import { Box } from '@mui/material';
 import { NavLink } from './components/NavLink/NavLink';
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 import { AppRoutes } from '@/shared/lib/routes';
 import styles from './Navbar.module.scss';
 import cn from 'classnames';
+import { INavbarProps } from './types';
 
-interface INavbarProps {
-    className?: string;
-}
-
-export const Navbar = ({ className }: INavbarProps) => {
+export const Navbar: React.FC<INavbarProps> = ({ className }) => {
     const t = useTranslations('common');
 
     return (
@@ -32,5 +30,5 @@ export const Navbar = ({ className }: INavbarProps) => {
                 icon="/assets/icons/statistics.svg"
             />
         </Box>
-    )
-}
+    );
+};

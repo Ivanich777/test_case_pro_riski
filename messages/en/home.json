@@ -1,5 +1,6 @@
 {
     "title": "General statistics",
+    "description": "Trading dashboard and statistics. Track your trading operations, analyze results and optimize strategies.",
     "filters": "Filters",
     "dateFrom": "Date from",
     "dateTo": "Date to",

@@ -4,14 +4,7 @@ import React from 'react';
 import { Box, Pagination as MuiPagination, Typography, Stack } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import styles from './Pagination.module.scss';
-
-interface IPaginationProps {
-    page: number;
-    totalPages: number;
-    total: number;
-    pageSize: number;
-    onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
-}
+import { IPaginationProps } from './types';
 
 export const Pagination: React.FC<IPaginationProps> = ({
     page,

@@ -3,14 +3,7 @@ import { Button, Menu, MenuItem } from '@mui/material';
 import { useMenu } from '@/shared/hooks/useMenu';
 import styles from './SelectButton.module.scss';
 import cn from 'classnames';
-
-interface ISelectButtonProps {
-    label: string;
-    options: Array<{ value: string; label: string }>;
-    value?: string;
-    onChange?: (value: string) => void;
-    disabled?: boolean;
-}
+import { ISelectButtonProps } from './types';
 
 export const SelectButton: React.FC<ISelectButtonProps> = ({
     label,
@@ -27,7 +20,6 @@ export const SelectButton: React.FC<ISelectButtonProps> = ({
     };
 
     const selectedOption = options.find(opt => opt.value === value);
-    const displayLabel = selectedOption ? selectedOption.label : label;
     const isSelected = value !== undefined && value !== 'all';
 
     return (
@@ -58,7 +50,7 @@ export const SelectButton: React.FC<ISelectButtonProps> = ({
                     </svg>
                 }
             >
-                {displayLabel}
+                {selectedOption?.label || label}
             </Button>
             <Menu
                 anchorEl={anchorEl}
@@ -73,19 +65,16 @@ export const SelectButton: React.FC<ISelectButtonProps> = ({
                     horizontal: 'left',
                 }}
             >
-                {options.map((option) => {
-                    const isSelected = option.value === value;
-                    return (
-                        <MenuItem
-                            key={option.value}
-                            onClick={() => handleSelect(option.value)}
-                            selected={isSelected}
-                            disabled={isSelected}
-                        >
-                            {option.label}
-                        </MenuItem>
-                    );
-                })}
+                {options.map((option) => (
+                    <MenuItem
+                        key={option.value}
+                        onClick={() => handleSelect(option.value)}
+                        selected={option.value === value}
+                        disabled={option.value === value}
+                    >
+                        {option.label}
+                    </MenuItem>
+                ))}
             </Menu>
         </>
     );

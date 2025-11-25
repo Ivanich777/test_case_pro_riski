@@ -1,22 +1,17 @@
-'use client'
+'use client';
 
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import { Icon } from "@/shared/ui/Icon";
+import React from 'react';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import { Icon } from '@/shared/ui/Icon';
 import styles from './LangSwitcher.module.scss';
-import { useLocale, useTranslations } from "next-intl";
-import React from "react";
-import { NavigationLink } from "@/widgets/LangSwitcher/ui/components/NavigationLink/NavigationLink";
-import { LOCALES, isActiveLocale } from "@/shared/lib/localeUtils";
-import { useMenu } from "@/shared/hooks/useMenu";
+import { useLocale, useTranslations } from 'next-intl';
+import { NavigationLink } from '@/widgets/LangSwitcher/ui/components/NavigationLink/NavigationLink';
+import { LOCALES, isActiveLocale } from '@/shared/lib/localeUtils';
+import { useMenu } from '@/shared/hooks/useMenu';
 import cn from 'classnames';
+import { ILangSwitcherProps } from './types';
 
-interface ILangSwitcherProps {
-    icon: string
-}
-
-
-export const LangSwitcher: React.FC<ILangSwitcherProps> = (props) => {
-    const { icon } = props;
+export const LangSwitcher: React.FC<ILangSwitcherProps> = ({ icon }) => {
     const { anchorEl, open, handleOpen, handleClose } = useMenu();
     const t = useTranslations('common');
     const currentLocale = useLocale();

@@ -4,7 +4,7 @@ import { IconButton } from "@mui/material";
 import { Icon } from "@/shared/ui/Icon";
 import styles from './QRButton.module.scss';
 
-export const QRButton = () => {
+export const QRButton: React.FC = () => {
     const handleClick = () => {
         window.open('https://proriski.com/', '_blank');
     };

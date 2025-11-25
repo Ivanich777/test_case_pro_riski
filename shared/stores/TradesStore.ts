@@ -106,7 +106,7 @@ export class TradesStore {
                 filteredTrades = filteredTrades.filter(
                     trade => trade.entryDate <= dateTo
                 );
-            }
+    }
 
             filteredTrades.sort((a, b) => b.entryDate.getTime() - a.entryDate.getTime());
 
