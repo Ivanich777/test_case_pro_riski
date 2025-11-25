@@ -4,7 +4,10 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { DateRangeFilter, DateRangePreset } from '@/shared/ui/DateRangeFilter';
 import { useStore } from '@/shared/stores';
-import { IDateRangeFilterWrapperProps } from './types';
+
+interface IDateRangeFilterWrapperProps {
+    badgeValue?: number;
+}
 
 export const DateRangeFilterWrapper: React.FC<IDateRangeFilterWrapperProps> = observer(({ badgeValue }) => {
     const { tradesStore } = useStore();
